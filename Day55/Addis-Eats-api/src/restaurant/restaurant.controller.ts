@@ -1,4 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 
-@Controller('restaurant')
-export class RestaurantController {}
+@Controller("restaurants")
+export class RestaurantsController {
+  constructor(private readonly restaurants: RestaurantsService) {}
+ 
+  @Get()
+  findAll(@Query("area") area?: Area) { return this.restaurants.findAll(area); }
+ 
+  @Get(":id")
+  findOne(@Param("id", ParseIntPipe) id: number) { return this.restaurants.findOne(id); }
+}
+@Post()
+create(@Body() dto: CreateRestaurantDto): Restaurant {
+  return this.restaurants.create(dto);
+}
+
