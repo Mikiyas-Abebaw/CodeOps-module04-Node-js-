@@ -4,6 +4,11 @@ import { RestaurantService } from './restaurant.service';
 
 @Module({
   controllers: [RestaurantController],
-  providers: [RestaurantService]
+  providers: [
+  RestaurantsService,
+  { provide: RESTAURANT_REPOSITORY,
+    useClass: InMemoryRestaurantRepository },
+]
+
 })
 export class RestaurantModule {}
