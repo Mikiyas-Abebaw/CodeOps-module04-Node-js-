@@ -1,7 +1,14 @@
-
-import { Controller,Get,Param,ParseIntPipe,} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Query,
+  Header,
+} from '@nestjs/common';
 
 import { RestaurantsService } from './restaurants.service';
+import { FindRestaurantsQuery } from './dto/find-restaurants.query';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -11,8 +18,14 @@ export class RestaurantsController {
 
   @Get('open')
   findOpenRestaurants() {
-  return this.restaurantsService.findOpenRestaurants();
-}
+    return this.restaurantsService.findOpenRestaurants();
+  }
+
+  @Get()
+  @Header('Cache-Control', 'public, max-age=60')
+  findAll(@Query() query: FindRestaurantsQuery) {
+    return this.restaurantsService.findAll(query);
+  }
 
   @Get(':id/dishes/:dishId')
   findOneDish(
