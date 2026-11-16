@@ -1,16 +1,6 @@
-import {
-  Controller,
-  Get,
-  Patch,
-  Delete,
-  Param,
-  ParseIntPipe,
-  Query,
-  Body,
-  HttpCode,
-  HttpStatus,
-  Header,
-} from '@nestjs/common';
+import {Controller,Get,Patch,Delete,Param,ParseIntPipe,Query,Body,
+  HttpCode,HttpStatus,Header,Post,} from '@nestjs/common';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 import { OrdersService } from './orders.service';
 import { FindOrdersQuery } from './dto/find-orders.query';
@@ -52,4 +42,10 @@ export class OrdersController {
   remove(@Param('id', ParseIntPipe) id: number): void {
     this.ordersService.remove(id);
   }
+
+  @Post()
+  @Header('Cache-Control', 'no-store')
+  create(@Body() dto: CreateOrderDto) {
+  return this.ordersService.create(dto);
+}
 }

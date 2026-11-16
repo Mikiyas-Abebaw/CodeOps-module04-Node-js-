@@ -5,6 +5,7 @@ import { Order, OrderStatus } from './orders.type';
 import { FindOrdersQuery } from './dto/find-orders.query';
 import { Page } from '../common/page.type';
 import { SEED } from '../restaurants/restaurants.mock';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Injectable()
 export class OrdersService {
