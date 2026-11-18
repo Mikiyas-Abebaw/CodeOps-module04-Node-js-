@@ -7,8 +7,8 @@ import {
   Max,
   Min,
 } from 'class-validator';
-
-import { AREAS, Area } from '../restaurants.type';
+import { AREAS } from '../restaurants.type';
+import type { Area } from '../restaurants.type';
 
 export class FindRestaurantsQuery {
   @IsOptional()

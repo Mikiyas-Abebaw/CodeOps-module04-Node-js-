@@ -1,7 +1,8 @@
 import { Type } from 'class-transformer';
 import {IsIn,IsInt,IsNotEmpty,IsString,MaxLength,Min,} from 'class-validator';
 
-import { AREAS, Area } from '../../restaurants/restaurants.type';
+import { AREAS } from '../../restaurants/restaurants.type';
+import type { Area } from '../../restaurants/restaurants.type';
 
 export class CreateOrderDto {
   @IsString()

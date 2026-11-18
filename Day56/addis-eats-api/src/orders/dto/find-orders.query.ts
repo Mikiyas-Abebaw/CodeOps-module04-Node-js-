@@ -7,8 +7,11 @@ import {
   Min,
 } from 'class-validator';
 
-import { AREAS, Area } from '../../restaurants/restaurants.type';
-import { ORDER_STATUSES, OrderStatus } from '../orders.type';
+import { AREAS } from '../../restaurants/restaurants.type';
+import type { Area } from '../../restaurants/restaurants.type';
+
+import { ORDER_STATUSES } from '../orders.type';
+import type { OrderStatus } from '../orders.type';
 
 export class FindOrdersQuery {
   @IsOptional()
