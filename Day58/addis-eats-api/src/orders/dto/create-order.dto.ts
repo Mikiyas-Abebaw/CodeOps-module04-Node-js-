@@ -1,14 +1,29 @@
 import { Type } from 'class-transformer';
-import {IsIn,IsInt,IsNotEmpty,IsString,MaxLength,Min,} from 'class-validator';
+import {
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  Min,
+  Validate,
+} from 'class-validator';
 
 import { AREAS } from '../../restaurants/restaurants.type';
 import type { Area } from '../../restaurants/restaurants.type';
+import { IsSantimConstraint } from '../../common/validators/is-santim.constraint';
+import { IsTeleBirrNumber } from '../../common/validators/is-telebirr-number.validator';
 
 export class CreateOrderDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
   customer: string;
+
+  @IsOptional()
+  @IsTeleBirrNumber()
+  phone?: string;
 
   @IsIn([...AREAS])
   area: Area;
@@ -18,8 +33,6 @@ export class CreateOrderDto {
   @Min(1)
   restaurantId: number;
 
-  @Type(() => Number)
-  @IsInt()
-  @Min(0)
+  @Validate(IsSantimConstraint)
   totalSantim: number;
 }
