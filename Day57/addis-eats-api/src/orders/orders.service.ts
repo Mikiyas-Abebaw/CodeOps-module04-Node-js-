@@ -48,18 +48,7 @@ findAll(query: FindOrdersQuery): Page<Order> {
   };
 }
 
-findPending(): Page<Order> {
-  const items = this.ordersRepo.findAll().filter(
-    (order) => order.status === 'PENDING',
-  );
 
-  return {
-    items,
-    total: items.length,
-    limit: items.length,
-    offset: 0,
-  };
-}
 
 findOne(id: number): Order {
   const order = this.ordersRepo.findOne(id);

@@ -1,3 +1,4 @@
+
 import {
   Controller,
   Get,
@@ -15,11 +16,6 @@ export class RestaurantsController {
   constructor(
     private readonly restaurantsService: RestaurantsService,
   ) {}
-
-  @Get('open')
-  findOpenRestaurants() {
-    return this.restaurantsService.findOpenRestaurants();
-  }
 
   @Get()
   @Header('Cache-Control', 'public, max-age=60')
@@ -44,6 +40,6 @@ export class RestaurantsController {
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-  return this.restaurantsService.findOneRestaurant(id);
-}
+    return this.restaurantsService.findOneRestaurant(id);
+  }
 }

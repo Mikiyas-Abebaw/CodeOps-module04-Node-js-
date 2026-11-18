@@ -1,7 +1,20 @@
-import {Controller,Get,Patch,Delete,Param,ParseIntPipe,Query,Body,
-  HttpCode,HttpStatus,Header,Post,} from '@nestjs/common';
-import { CreateOrderDto } from './dto/create-order.dto';
 
+import {
+  Controller,
+  Get,
+  Patch,
+  Delete,
+  Param,
+  ParseIntPipe,
+  Query,
+  Body,
+  HttpCode,
+  HttpStatus,
+  Header,
+  Post,
+} from '@nestjs/common';
+
+import { CreateOrderDto } from './dto/create-order.dto';
 import { OrdersService } from './orders.service';
 import { FindOrdersQuery } from './dto/find-orders.query';
 import { UpdateStatusDto } from './dto/update-status.dto';
@@ -11,11 +24,6 @@ export class OrdersController {
   constructor(
     private readonly ordersService: OrdersService,
   ) {}
-
-  @Get('pending')
-  findPending() {
-    return this.ordersService.findPending();
-  }
 
   @Get()
   @Header('Cache-Control', 'no-store')
@@ -46,6 +54,6 @@ export class OrdersController {
   @Post()
   @Header('Cache-Control', 'no-store')
   create(@Body() dto: CreateOrderDto) {
-  return this.ordersService.create(dto);
-}
+    return this.ordersService.create(dto);
+  }
 }

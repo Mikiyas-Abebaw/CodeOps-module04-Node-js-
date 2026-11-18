@@ -39,16 +39,7 @@ export class RestaurantsService {
     };
   }
 
-  findOpenRestaurants() {
-    const items = SEED.filter((restaurant) => restaurant.isOpen);
-
-    return {
-      items,
-      total: items.length,
-      limit: items.length,
-      offset: 0,
-    };
-  }
+ 
 
   findRestaurantDishes(restaurantId: number) {
     this.findOneRestaurant(restaurantId);
