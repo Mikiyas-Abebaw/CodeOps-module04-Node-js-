@@ -1,5 +1,7 @@
 import { Type } from 'class-transformer';
 import {
+  ArrayNotEmpty,
+  IsArray,
   IsIn,
   IsInt,
   IsNotEmpty,
@@ -8,12 +10,14 @@ import {
   MaxLength,
   Min,
   Validate,
+  ValidateNested,
 } from 'class-validator';
 
 import { AREAS } from '../../restaurants/restaurants.type';
 import type { Area } from '../../restaurants/restaurants.type';
 import { IsSantimConstraint } from '../../common/validators/is-santim.constraint';
 import { IsTeleBirrNumber } from '../../common/validators/is-telebirr-number.validator';
+import { OrderLineDto } from './order-line.dto';
 
 export class CreateOrderDto {
   @IsString()
@@ -35,4 +39,10 @@ export class CreateOrderDto {
 
   @Validate(IsSantimConstraint)
   totalSantim: number;
+
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => OrderLineDto)
+  lines: OrderLineDto[];
 }
