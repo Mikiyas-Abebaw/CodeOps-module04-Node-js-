@@ -18,6 +18,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { OrdersService } from './orders.service';
 import { FindOrdersQuery } from './dto/find-orders.query';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { RequireApiKey } from '../common/decorators/require-api-key.decorator';
 
 @Controller('orders')
 export class OrdersController {
@@ -46,6 +47,7 @@ export class OrdersController {
   }
 
   @Delete(':id')
+  @RequireApiKey()
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', ParseIntPipe) id: number): void {
     this.ordersService.remove(id);
