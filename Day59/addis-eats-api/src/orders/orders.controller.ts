@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Get,
@@ -19,6 +18,7 @@ import { OrdersService } from './orders.service';
 import { FindOrdersQuery } from './dto/find-orders.query';
 import { UpdateStatusDto } from './dto/update-status.dto';
 import { RequireApiKey } from '../common/decorators/require-api-key.decorator';
+import { Roles } from '../common/decorators/roles.decorator';
 
 @Controller('orders')
 export class OrdersController {
@@ -48,6 +48,7 @@ export class OrdersController {
 
   @Delete(':id')
   @RequireApiKey()
+  @Roles('staff')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', ParseIntPipe) id: number): void {
     this.ordersService.remove(id);
