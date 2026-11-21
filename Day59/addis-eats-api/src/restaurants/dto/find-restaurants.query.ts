@@ -4,16 +4,16 @@ import {
   IsIn,
   IsInt,
   IsOptional,
+  IsString,
   Max,
   Min,
 } from 'class-validator';
-import { AREAS } from '../restaurants.type';
-import type { Area } from '../restaurants.type';
 
 export class FindRestaurantsQuery {
+  // validated and normalised by ParseAreaPipe in the controller
   @IsOptional()
-  @IsIn([...AREAS])
-  area?: Area;
+  @IsString()
+  area?: string;
 
   @IsOptional()
   @Transform(({ value }) =>

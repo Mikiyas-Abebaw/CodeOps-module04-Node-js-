@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Get,
@@ -10,6 +9,8 @@ import {
 
 import { RestaurantsService } from './restaurants.service';
 import { FindRestaurantsQuery } from './dto/find-restaurants.query';
+import { ParseAreaPipe } from '../common/pipes/parse-area.pipe';
+import type { Area } from './restaurants.type';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -19,8 +20,12 @@ export class RestaurantsController {
 
   @Get()
   @Header('Cache-Control', 'public, max-age=60')
-  findAll(@Query() query: FindRestaurantsQuery) {
-    return this.restaurantsService.findAll(query);
+  findAll(
+    @Query() query: FindRestaurantsQuery,
+    @Query('area', ParseAreaPipe) area?: Area,
+  ) {
+    // the pipe's normalised area replaces the raw string from the DTO
+    return this.restaurantsService.findAll({ ...query, area });
   }
 
   @Get(':id/dishes/:dishId')
