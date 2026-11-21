@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RestaurantsModule } from './restaurants/restaurants.module';
@@ -10,7 +11,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 
 @Module({
-  imports: [RestaurantsModule, DishesModule, OrdersModule],
+  imports: [RestaurantsModule, DishesModule, OrdersModule,  ConfigModule.forRoot({ isGlobal: true }),],
   controllers: [AppController],
   providers: [
     AppService,
